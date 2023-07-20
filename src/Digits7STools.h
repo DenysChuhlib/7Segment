@@ -704,7 +704,7 @@ protected:
     
     Digits7SArray<DigitsSize> newDigits;
 
-    void showFrame(uint16_t pos) {
+    virtual void showFrame(uint16_t pos) {
         pos = constrain(pos, 0, DigitsSize - 1);
         
         switch (animationId[pos]) {
@@ -871,10 +871,10 @@ protected:
 };
 
 template <uint16_t DigitsSize = 4>
-class Digits7SRunningSring : public Digits7S<DigitsSize> {
+class Digits7SRunningString : public Digits7S<DigitsSize> {
 public:
 
-    Digits7SRunningSring() {}
+    Digits7SRunningString() {}
     
     void setDel(uint16_t del_) {del = del_;}
     uint16_t getDel() {return del;}
@@ -999,7 +999,7 @@ protected:
     virtual void displayMain() = 0;
     virtual void displayMain(uint16_t pos) { displayMain(); };
     
-    virtual void sendByte(uint16_t BitAddr, const Digit7SData& sendData) = 0;
+    virtual void sendByte(uint16_t pos, const Digit7SData& sendData) = 0;
     
     virtual void sendArray(const Digits7SArray<DigitsSize>& sendData) = 0;
     
@@ -1025,7 +1025,7 @@ protected:
         if (useColon) this->digits[1].setDot(colon);
     }
     
-    virtual void displayMain() {
+    virtual void displayMain() override {
         colonMain();
     }
 };
