@@ -20,6 +20,8 @@ public:
         start();
         writeByte(0x88 + brightness);
         stop();
+        
+        this->brightness = brightness;
     }
     uint8_t getBrightness() override { return brightness; }
     

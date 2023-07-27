@@ -76,10 +76,10 @@ struct Digit7SData {
     Digit7SData& setDot(bool f = true) {setBit(7, f); return *this; }
     
     Digit7SData& setUp      (bool f = true) { setA(f); return *this; }
-    Digit7SData& setUp_L    (bool f = true) { setB(f); return *this; }
-    Digit7SData& setUp_R    (bool f = true) { setF(f); return *this; }
-    Digit7SData& setDown_L  (bool f = true) { setC(f); return *this; }
-    Digit7SData& setDown_R  (bool f = true) { setE(f); return *this; }
+    Digit7SData& setUp_R    (bool f = true) { setB(f); return *this; }
+    Digit7SData& setUp_L    (bool f = true) { setF(f); return *this; }
+    Digit7SData& setDown_R  (bool f = true) { setC(f); return *this; }
+    Digit7SData& setDown_L  (bool f = true) { setE(f); return *this; }
     Digit7SData& setDown    (bool f = true) { setD(f); return *this; }
     Digit7SData& setCenter  (bool f = true) { setG(f); return *this; }
     
@@ -88,28 +88,28 @@ struct Digit7SData {
         return *this;
     }
     
-    bool getBit(uint8_t bit) {
+    bool getBit(uint8_t bit) const {
         bit = constrain(bit, 0, 7);
         return (value >> bit) & 1;
     }
     
-    bool getA()     { return getBit(0); }
-    bool getB()     { return getBit(1); }
-    bool getC()     { return getBit(2); }
-    bool getD()     { return getBit(3); }
-    bool getE()     { return getBit(4); }
-    bool getF()     { return getBit(5); }
-    bool getG()     { return getBit(6); }
+    bool getA() const     { return getBit(0); }
+    bool getB() const     { return getBit(1); }
+    bool getC() const     { return getBit(2); }
+    bool getD() const     { return getBit(3); }
+    bool getE() const     { return getBit(4); }
+    bool getF() const     { return getBit(5); }
+    bool getG() const     { return getBit(6); }
     
-    bool getDot()   { return getBit(7); }
+    bool getDot() const   { return getBit(7); }
 
-    bool getUp()        { return getA(); }
-    bool getUp_L()      { return getB(); }
-    bool getUp_R()      { return getF(); }
-    bool getDown_L()    { return getC(); }
-    bool getDown_R()    { return getE(); }
-    bool getDown()      { return getD(); }
-    bool getCenter()    { return getG(); }
+    bool getUp()     const { return getA(); }
+    bool getUp_R()   const { return getB(); }
+    bool getUp_L()   const { return getF(); }
+    bool getDown_R() const { return getC(); }
+    bool getDown_L() const { return getE(); }
+    bool getDown()   const { return getD(); }
+    bool getCenter() const { return getG(); }
     
     Digit7SData& setNumber(uint8_t n) {
         switch (n % 10) {
@@ -233,14 +233,14 @@ struct Digit7SData {
         return *this;
     }
 
-    int8_t getNumber() {
+    int8_t getNumber() const {
         for(uint8_t i = 0; i < 10; i++) {
             if (value == Digit7SData().setNumber(i)) return i;
         }
         return -1; //value not number
     }
     
-    int16_t getChar() {
+    int16_t getChar() const {
         for(uint8_t i = 32; i < 127; i++) {
             if (value == Digit7SData().setChar(i)) return i;
         }
@@ -271,25 +271,21 @@ public:
     
     Digits7SArray& clear() {    for (uint16_t i = 0; i < DigitsSize; i++) digits[i].clear(); return *this; }
     
-    template <uint16_t size> 
+    template <uint16_t size, uint16_t pos = 0, uint16_t num = size> 
     Digits7SArray& setDigits(const Digits7SArray<size>& newDigits) {
-        for(uint16_t i = 0; i < size && i < DigitsSize; i++)
-            digits[i] = newDigits[i];
+        for(uint16_t i = 0; i < size && i + pos < DigitsSize; i++)
+            digits[i + pos] = newDigits[i];
         return *this;
     }
     
-    template <uint16_t num, uint16_t size>
+    template <uint16_t size, uint16_t num = size>
     Digits7SArray& setDigitsFist(const Digits7SArray<size>& newDigits) {
-        for(uint16_t i = 0; i < num && i < size && i < DigitsSize; i++)
-            digits[i] = newDigits[i];
-        return *this;
+        return setDigits<size, 0, num>(newDigits);
     }
     
-    template <uint16_t num, uint16_t size>
+    template <uint16_t size, uint16_t num = size>
     Digits7SArray& setDigitsLast(const Digits7SArray<size>& newDigits) {
-        for(uint16_t i = 0; i < num && i < size && i < DigitsSize; i++)
-            digits[DigitsSize - i - 1] = newDigits[size - i - 1];
-        return *this;
+        return setDigits<size, DigitsSize - size, num>(newDigits);
     }
 };
 
@@ -360,25 +356,21 @@ public:
     
     Digits7S& clear() { digits.clear(); return *this; }
     
-    template <uint16_t size> 
+    template <uint16_t size, uint16_t pos = 0, uint16_t num = size> 
     Digits7S& setDigits(const Digits7SArray<size>& newDigits) {
-        for(uint16_t i = 0; i < size && i < DigitsSize; i++)
-            digits[i] = newDigits[i];
+        for(uint16_t i = 0; i < size && i + pos < DigitsSize; i++)
+            digits[i + pos] = newDigits[i];
         return *this;
     }
     
-    template <uint16_t num, uint16_t size>
+    template <uint16_t size, uint16_t num = size>
     Digits7S& setDigitsFist(const Digits7SArray<size>& newDigits) {
-        for(uint16_t i = 0; i < num && i < size && i < DigitsSize; i++)
-            digits[i] = newDigits[i];
-        return *this;
+        return setDigits<size, 0, num>(newDigits);
     }
     
-    template <uint16_t num, uint16_t size>
+    template <uint16_t size, uint16_t num = size>
     Digits7S& setDigitsLast(const Digits7SArray<size>& newDigits) {
-        for(uint16_t i = 0; i < num && i < size && i < DigitsSize; i++)
-            digits[DigitsSize - i - 1] = newDigits[size - i - 1];
-        return *this;
+        return setDigits<size, DigitsSize - size, num>(newDigits);
     }
     
     
@@ -480,7 +472,7 @@ public:
     bool tickAnimation() {
         bool show = 0;
         for (uint16_t i = 0; i < DigitsSize; i++) {
-            if (millis() - timer[i] >= del[i]) {
+            if ((millis() & 0xFFFF) - timer[i] >= del[i]) {
                 
                 if (animationId[i]) show = true;
                 else continue;
@@ -489,7 +481,7 @@ public:
                 
                 if (animationId[i]) {
                     frame[i]++;
-                    timer[i] = millis();
+                    timer[i] = millis() & 0xFFFF;
                 }
             }
         }
@@ -515,7 +507,7 @@ public:
         if (resetData) {
             newDigits = nData;
         
-            timer[0] = millis();
+            timer[0] = millis() & 0xFFFF;
             for (uint16_t i = 0; i < DigitsSize; i++) {
                 animationId[i] = id;
                 frame[i] = 0;
@@ -539,7 +531,7 @@ public:
         
             animationId[pos] = id;
             frame[pos] = 0;
-            timer[pos] = millis();
+            timer[pos] = millis() & 0xFFFF;
         }
     }
     
@@ -587,7 +579,7 @@ public:
         
         if (animationId[pos]) {
             frame[pos]++;
-            timer[pos] = millis();
+            timer[pos] = millis() & 0xFFFF;
         }
         
         return true;
@@ -697,7 +689,7 @@ public:
     
 protected:
     uint16_t del[DigitsSize] = {30};
-    uint32_t timer[DigitsSize];
+    uint16_t timer[DigitsSize];
     
     uint16_t frame[DigitsSize];
     uint8_t animationId[DigitsSize] = {NONE};
@@ -882,7 +874,7 @@ public:
     bool tickAnimation() {
         bool show = 0;
         if (isAnimation()) {
-            if (millis() - timer >= del) {
+            if ((millis() & 0xFFFF) - timer >= del) {
                 show = true;
                 
                 nextFrame();
@@ -906,7 +898,7 @@ public:
         }
         
         frame++;
-        timer = millis();
+        timer = millis() & 0xFFFF;
         
         return true;
     }
@@ -931,7 +923,7 @@ public:
         if (isAnimation() && !stopAnimation) return;
         reverse = 0;
         str = s;
-        timer = millis();
+        timer = millis() & 0xFFFF;
         frame = 0;
     }
     
@@ -939,14 +931,14 @@ public:
         if (isAnimation() && !stopAnimation) return;
         reverse = 1;
         str = s;
-        timer = millis();
+        timer = millis() & 0xFFFF;
         frame = 0;
     }
 
 protected:
     bool reverse = 0;
     uint16_t del = 200;
-    uint32_t timer;
+    uint16_t timer;
 
     String str;
     
