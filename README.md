@@ -1,4 +1,4 @@
-[![Foo](https://img.shields.io/badge/Library%20Manager-7Segment%201.0.1-000282.svg?style=for-the-badge&logo=arduino)](https://www.arduino.cc/reference/en/libraries/7segment)
+[![Foo](https://img.shields.io/badge/Library%20Manager-7Segment%201.0.2-000282.svg?style=for-the-badge&logo=arduino)](https://www.arduino.cc/reference/en/libraries/7segment)
 [![PlatformIO Registry](https://badges.registry.platformio.org/packages/denyschuhlib/library/7Segment.svg)](https://registry.platformio.org/libraries/denyschuhlib/7Segment)
 [![Foo](https://img.shields.io/badge/How%20to%20install%3F-ArduBadge-000282.svg?logo=arduino)](https://www.ardu-badge.com/7Segment)
 
