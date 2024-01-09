@@ -5,7 +5,7 @@
 [![Foo](https://img.shields.io/badge/README-English-fff700.svg?style=for-the-badge)](https://github-com.translate.goog/DenysChuhlib/7Segment?_x_tr_sl=uk&_x_tr_tl=en)
 [![Foo](https://img.shields.io/badge/README-Руский-fff700.svg?style=for-the-badge)](https://github-com.translate.goog/DenysChuhlib/7Segment?_x_tr_sl=uk&_x_tr_tl=ru)
 
-|<br>**Планується оновлення з великою екосистемою бібліотек і інструментів!  _Можливе порушення сумісності!!_**<br><br>|
+|<br>**Планується оновлення з великою екосистемою бібліотек і інструментів! <br> _Можливе порушення сумісності!!_**<br><br>|
 | --- |
 
 # 7Segment
