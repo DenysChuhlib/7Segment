@@ -5,8 +5,9 @@
 [![Foo](https://img.shields.io/badge/README-English-fff700.svg?style=for-the-badge)](https://github-com.translate.goog/DenysChuhlib/7Segment?_x_tr_sl=uk&_x_tr_tl=en)
 [![Foo](https://img.shields.io/badge/README-Руский-fff700.svg?style=for-the-badge)](https://github-com.translate.goog/DenysChuhlib/7Segment?_x_tr_sl=uk&_x_tr_tl=ru)
 
-|<br>**Планується оновлення з великою екосистемою бібліотек і інструментів! <br> _Можливе порушення сумісності!!_**<br><br>|
-| --- |
+> [!WARNING]
+> **Планується оновлення з великою екосистемою бібліотек і інструментів! <br> _Можливе порушення сумісності!!_**<br>
+
 
 # 7Segment
 Бібліотека для будь-яких семисегментних дисплеїв.
